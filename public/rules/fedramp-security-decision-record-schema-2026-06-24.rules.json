@@ -1,0 +1,44 @@
+{
+  "rules": [
+    {
+      "id": "sdr-frr-min-count",
+      "description": "At least one FedRAMP requirement must be documented",
+      "severity": "error",
+      "path": "fedRampRequirements[].frrID",
+      "check": "minCount",
+      "value": 1
+    },
+    {
+      "id": "sdr-ksi-min-count",
+      "description": "At least one Key Security Indicator must be documented",
+      "severity": "error",
+      "path": "keySecurityIndicators[].ksiId",
+      "check": "minCount",
+      "value": 1
+    },
+    {
+      "id": "sdr-frr-id-no-whitespace",
+      "description": "FedRAMP requirement IDs should not contain whitespace",
+      "severity": "warning",
+      "path": "fedRampRequirements[].frrID",
+      "check": "notMatches",
+      "value": "\\s"
+    },
+    {
+      "id": "sdr-frr-implemented-needs-validation",
+      "description": "Requirements marked \"Implemented\" should include a validation statement describing how that was confirmed",
+      "severity": "warning",
+      "path": "fedRampRequirements[].frrValidation",
+      "check": "required",
+      "when": { "path": "frrImplementationStatus", "check": "equals", "value": "Implemented" }
+    },
+    {
+      "id": "sdr-control-partial-needs-description",
+      "description": "Controls marked \"Partially Implemented\" must describe what remains outstanding",
+      "severity": "error",
+      "path": "securityControls[].controlImplementationDescription",
+      "check": "required",
+      "when": { "path": "controlImplementationStatus", "check": "equals", "value": "Partially Implemented" }
+    }
+  ]
+}

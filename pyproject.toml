@@ -1,0 +1,9 @@
+[project]
+name = "sdreditor"
+version = "0.2.0"
+requires-python = ">=3.9"
+dependencies = [
+    "json-schema-for-humans>=1.5.1",
+    "pywebview>=5.0.0",
+    "requests>=2.32.5",
+]

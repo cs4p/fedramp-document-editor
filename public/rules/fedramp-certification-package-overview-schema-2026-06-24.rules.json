@@ -1,0 +1,28 @@
+{
+  "rules": [
+    {
+      "id": "cop-service-name-min-length",
+      "description": "Service name should be a real name, not a placeholder",
+      "severity": "warning",
+      "path": "serviceIdentification.serviceName",
+      "check": "minLength",
+      "value": 3
+    },
+    {
+      "id": "cop-contact-email-format",
+      "description": "Contact email addresses must look like an email address",
+      "severity": "error",
+      "path": "contactInformation[].contactEmail",
+      "check": "matches",
+      "value": "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"
+    },
+    {
+      "id": "cop-contact-min-count",
+      "description": "At least two contacts (Security and Sales) should be listed",
+      "severity": "error",
+      "path": "contactInformation[].contactType",
+      "check": "minCount",
+      "value": 2
+    }
+  ]
+}

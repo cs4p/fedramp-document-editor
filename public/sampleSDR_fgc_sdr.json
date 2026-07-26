@@ -1,0 +1,1772 @@
+{
+  "certificationOverviewPackageUri": "https://raw.githubusercontent.com/novacivic/fedramp-public/main/public/sampleSDR_fgc_cop.json",
+  "fedRampRequirements": [
+    {
+      "frId": "KSI-CED-RAT",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "All NovaCivic personnel with access to FGC systems complete annual FedRAMP security awareness training and role-specific cybersecurity training. Training effectiveness is reviewed annually by the CISO against incident trends and audit findings.",
+          "securityTests": [
+            {
+              "frequency": "Annually",
+              "automated": false,
+              "securityTestDescription": "CISO reviews training completion records and curriculum adequacy against current threat landscape and FedRAMP guidance.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Policy",
+                  "evidenceDescription": "Training completion attestation showing 100% completion for all in-scope personnel.",
+                  "evidenceText": "Training Review - 2026-01-15\nPeriod: Q4 2025\nIn-scope personnel: 47\nCompleted: 47 (100%)\nCurriculum reviewed: CISO approved 2026-01-15\nNext review: 2027-01-15",
+                  "lastUpdated": "2026-01-15"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-CMT-LMC",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "All FGC infrastructure and application changes are captured in AWS CloudTrail and forwarded to Splunk Cloud within 5 minutes. Logs are retained 365 days in Splunk and 7 years in S3 Glacier for compliance archival.",
+          "securityTests": [
+            {
+              "frequency": "Monthly",
+              "automated": false,
+              "securityTestDescription": "Security Operations reviews Splunk log source availability dashboard to confirm all expected sources are active and no gaps exceed 15 minutes over the prior 30 days.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Log",
+                  "evidenceDescription": "Log source availability attestation confirming all in-scope sources active in 2026-05.",
+                  "evidenceText": "Log Source Review - 2026-05-31\nAWS CloudTrail (all regions): ACTIVE\nECS Task Logs: ACTIVE\nAurora Audit Logs: ACTIVE\nOkta System Logs: ACTIVE\nGaps > 15 min (30-day): 0\nReviewer: Security Ops Team",
+                  "lastUpdated": "2026-05-31"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-CMT-RMV",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "FGC ECS tasks are immutable; all configuration changes result in a new task definition version deployed via GitHub Actions. An AWS Service Control Policy denies direct compute modification APIs to all principals except the CI/CD pipeline IAM role.",
+          "securityTests": [
+            {
+              "frequency": "Quarterly",
+              "automated": false,
+              "securityTestDescription": "Security team reviews CloudTrail for any direct EC2 or ECS modification events outside the authorized pipeline role to confirm the SCP is effective.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Configuration",
+                  "evidenceDescription": "SCP policy document prohibiting direct EC2/ECS modifications, effective Q1 2026.",
+                  "evidenceText": "SCP: DenyDirectModification v1.0\nEffect: Deny\nActions: ec2:ModifyInstance*, ecs:UpdateService\nExclusion: pipeline-deploy-role\nApplied: All production OUs\nReview Date: 2026-04-01\nViolations (90-day): 0",
+                  "lastUpdated": "2026-04-01"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-CMT-RVP",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "The FGC Change Management Policy (CMP-001) is reviewed annually by the CISO and updated within 30 days of any significant pipeline change or post-incident lessons learned.",
+          "securityTests": [
+            {
+              "frequency": "Annually",
+              "automated": false,
+              "securityTestDescription": "CISO and VP Engineering conduct joint review of CMP-001, documenting findings and sign-off.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Policy",
+                  "evidenceDescription": "CMP-001 v2.1 annual review sign-off.",
+                  "evidenceText": "Document: CMP-001 Change Management Policy v2.1\nReview Date: 2026-01-20\nReviewer: Marcus Webb, CISO\nApproval: Thomas Garrett, CEO\nNext Review: 2027-01-20",
+                  "lastUpdated": "2026-01-20"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-CMT-VTD",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "Every pull request triggers SAST (Semgrep), dependency scanning (OWASP Dependency-Check), and unit tests via GitHub Actions. Deployments require all checks to pass and approval from two engineers.",
+          "securityTests": [
+            {
+              "frequency": "Quarterly",
+              "automated": false,
+              "securityTestDescription": "Security team reviews GitHub branch protection settings and sampled CI/CD run history to confirm no deployments bypassed required security gates.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Configuration",
+                  "evidenceDescription": "GitHub branch protection configuration and CI/CD security gate attestation.",
+                  "evidenceText": "Branch: main\nRequired checks: semgrep, dependency-check, unit-tests\nRequired approvals: 2\nStale review dismissal: enabled\nBypass exceptions: 0\nReview Date: 2026-04-01",
+                  "lastUpdated": "2026-04-01"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-CNA-DFP",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "All FGC services run with the minimum required IAM permissions defined in Terraform-managed IAM roles. Inter-service communication is restricted to explicitly permitted ports and protocols via VPC security groups.",
+          "securityTests": [
+            {
+              "frequency": "Quarterly",
+              "automated": false,
+              "securityTestDescription": "Security team performs IAM access review to confirm no over-provisioned roles or policies exist across production accounts.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Audit Record",
+                  "evidenceDescription": "Q1 2026 IAM entitlement review attestation.",
+                  "evidenceText": "IAM Review - Q1 2026\nDate: 2026-04-01\nRoles reviewed: 23\nOver-provisioned: 0\nRemediated in quarter: 2 (scope reduced)\nReviewer: Security Team",
+                  "lastUpdated": "2026-04-01"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-CNA-EIS",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "AWS Config rules continuously monitor FGC resources against defined baselines. Any configuration drift from the Terraform-declared state generates a PagerDuty alert within 30 minutes.",
+          "securityTests": [
+            {
+              "frequency": "Monthly",
+              "automated": false,
+              "securityTestDescription": "Security team reviews AWS Config compliance dashboard to confirm zero non-compliant resources at month-end.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Configuration",
+                  "evidenceDescription": "AWS Config compliance dashboard summary for 2026-05.",
+                  "evidenceText": "AWS Config Compliance - 2026-05-31\nRules active: 42\nCompliant: 42\nNon-compliant: 0\nLast evaluation: 2026-05-31T23:59:00Z\nReviewer: Security Ops",
+                  "lastUpdated": "2026-05-31"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-CNA-IBP",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "All container images used by FGC are sourced from Amazon ECR Private repositories. Amazon Inspector scans images on push and blocks deployment if critical CVEs are present.",
+          "securityTests": [
+            {
+              "frequency": "Monthly",
+              "automated": false,
+              "securityTestDescription": "Security team reviews Amazon Inspector ECR scan results to confirm no unmitigated critical or high findings in production images.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Report",
+                  "evidenceDescription": "Amazon Inspector ECR scan summary for May 2026.",
+                  "evidenceText": "Inspector ECR Scan - 2026-05-31\nImages scanned: 18\nCritical CVEs (unmitigated): 0\nHigh CVEs (unmitigated): 0\nBlocked deployments: 0\nDate: 2026-05-31",
+                  "lastUpdated": "2026-05-31"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-CNA-MAT",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "FGC undergoes quarterly attack surface reviews to identify and decommission unused services, open ports, and dormant IAM roles. Unused resources are removed within 5 business days of identification.",
+          "securityTests": [
+            {
+              "frequency": "Quarterly",
+              "automated": false,
+              "securityTestDescription": "Engineering and security team perform joint attack surface review documented in the quarterly report.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Report",
+                  "evidenceDescription": "Q1 2026 attack surface review summary.",
+                  "evidenceText": "Attack Surface Review - Q1 2026\nDate: 2026-04-01\nUnused SGs removed: 3\nDormant IAM roles disabled: 1\nUnused open ports: 0\nReviewer: Engineering + Security",
+                  "lastUpdated": "2026-04-01"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-CNA-OFA",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "FGC is deployed across two AWS GovCloud availability zones with ECS service auto-scaling and Aurora Multi-AZ standby. Capacity is reviewed quarterly to maintain headroom above 30% during peak periods.",
+          "securityTests": [
+            {
+              "frequency": "Quarterly",
+              "automated": false,
+              "securityTestDescription": "Engineering team reviews ECS and Aurora capacity metrics to confirm headroom thresholds are met.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Configuration",
+                  "evidenceDescription": "ECS and Aurora availability configuration attestation.",
+                  "evidenceText": "Availability Configuration - 2026-05-01\nECS: Multi-AZ (us-gov-west-1a/b)\nAurora: Multi-AZ enabled\nAuto-scaling: min 2, max 10 tasks\nAvg capacity headroom: 48%\nReview Date: 2026-05-01",
+                  "lastUpdated": "2026-05-01"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-CNA-RNT",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "All FGC internet traffic flows through AWS ALB restricted to HTTPS/443. Internal subnets follow deny-by-default security groups. Database access is confined to private subnets with no internet-facing rules.",
+          "securityTests": [
+            {
+              "frequency": "Quarterly",
+              "automated": false,
+              "securityTestDescription": "Security team reviews all VPC security group rules to confirm no unrestricted inbound access on non-standard ports.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Configuration",
+                  "evidenceDescription": "Security group inventory showing no unrestricted ingress for 2026-04.",
+                  "evidenceText": "Security Group Review - 2026-04-01\nGroups reviewed: 14\nInternet-facing: 1 (ALB, 443 only)\nDatabase SG: private subnet, no internet\nUnrestricted ingress (0.0.0.0/0 non-443): 0\nReviewer: Security Team",
+                  "lastUpdated": "2026-04-01"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-CNA-RVP",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "FGC uses AWS Shield Standard and AWS WAF with the AWS Managed Rules Common Rule Set to protect against DDoS attacks and common web exploits. WAF rule sets are reviewed quarterly.",
+          "securityTests": [
+            {
+              "frequency": "Quarterly",
+              "automated": false,
+              "securityTestDescription": "Security team reviews WAF metrics and Shield Standard coverage to confirm protections are active and rules are current.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Configuration",
+                  "evidenceDescription": "AWS WAF and Shield Standard configuration attestation for 2026-04.",
+                  "evidenceText": "WAF/DDoS Config - 2026-04-01\nAWS Shield: Standard (active)\nAWS WAF: Enabled on ALB\nManaged rules: AWSManagedRulesCommonRuleSet, AWSManagedRulesSQLiRuleSet\nLast rule review: 2026-04-01\nBlocked requests (30-day): 12,483",
+                  "lastUpdated": "2026-04-01"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-CNA-ULN",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "FGC uses VPC segmentation with dedicated public, private application, and private data subnets. VPC Flow Logs are enabled and forwarded to Splunk for network traffic analysis and anomaly detection.",
+          "securityTests": [
+            {
+              "frequency": "Annually",
+              "automated": false,
+              "securityTestDescription": "Security team reviews VPC architecture to confirm appropriate segmentation is maintained and VPC Flow Logs are active.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Configuration",
+                  "evidenceDescription": "VPC architecture and subnet segmentation attestation.",
+                  "evidenceText": "VPC Architecture - 2026-05-01\nPublic subnets: 2 (ALB only)\nPrivate app subnets: 2 (ECS tasks)\nPrivate data subnets: 2 (Aurora)\nVPC Flow Logs: enabled, 90-day retention\nReview Date: 2026-05-01",
+                  "lastUpdated": "2026-05-01"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-IAM-AAM",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "Okta Government Cloud manages all FGC user accounts via SCIM provisioning integrated with agency HR systems. Accounts are automatically deprovisioned within 4 hours of separation events.",
+          "securityTests": [
+            {
+              "frequency": "Quarterly",
+              "automated": false,
+              "securityTestDescription": "Security team reviews Okta user inventory against HR system records to confirm no orphaned accounts exist.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Audit Record",
+                  "evidenceDescription": "Q1 2026 account lifecycle review attestation.",
+                  "evidenceText": "Account Review - Q1 2026\nDate: 2026-04-01\nActive accounts: 234\nOrphaned accounts: 0\nDeprovisioned in quarter: 8\nMax deprovisioning lag: 2.5 hours\nReviewer: Security Team",
+                  "lastUpdated": "2026-04-01"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-IAM-APM",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "All FGC user authentication uses Okta FIDO2/WebAuthn phishing-resistant MFA. Password-based authentication is disabled by Okta policy for all user-facing login flows.",
+          "securityTests": [
+            {
+              "frequency": "Quarterly",
+              "automated": false,
+              "securityTestDescription": "Security team reviews Okta authentication policy configuration to confirm FIDO2 enforcement is active and no password-only exceptions exist.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Configuration",
+                  "evidenceDescription": "Okta authentication policy configuration attestation.",
+                  "evidenceText": "Okta Auth Policy Review - 2026-04-01\nFIDO2/WebAuthn: Required for all users\nPassword-only login: Disabled\nExceptions: 0\nPolicy version: 3.1\nReviewer: Security Team",
+                  "lastUpdated": "2026-04-01"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-IAM-ELP",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "IAM roles and Okta application assignments follow least privilege. Quarterly access reviews remove unnecessary permissions and revoke dormant assignments.",
+          "securityTests": [
+            {
+              "frequency": "Quarterly",
+              "automated": false,
+              "securityTestDescription": "Security team reviews IAM role policies and Okta application assignments for over-provisioning.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Audit Record",
+                  "evidenceDescription": "Q1 2026 least-privilege access review summary.",
+                  "evidenceText": "Least Privilege Review - Q1 2026\nDate: 2026-04-01\nIAM roles reviewed: 23\nOkta assignments reviewed: 234\nOver-provisioned findings: 2\nRemediated: 2\nReviewer: Security Team",
+                  "lastUpdated": "2026-04-01"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-IAM-JIT",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "Privileged access to FGC production AWS accounts is JIT-provisioned via an internal access request workflow with CISO approval, granting time-limited credentials not exceeding 4 hours.",
+          "securityTests": [
+            {
+              "frequency": "Quarterly",
+              "automated": false,
+              "securityTestDescription": "Security team audits JIT access logs to confirm no standing privileged access exists outside approved service accounts.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Audit Record",
+                  "evidenceDescription": "JIT access log review for Q1 2026.",
+                  "evidenceText": "JIT Access Review - Q1 2026\nDate: 2026-04-01\nJIT sessions granted: 47\nMax session length: 4 hours\nStanding privileged access exceptions: 0\nUnauthorized escalations: 0\nReviewer: CISO",
+                  "lastUpdated": "2026-04-01"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-IAM-SNU",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "Non-user service accounts use ECS task IAM roles with instance metadata service v2 required. No long-lived API keys or passwords are used for service-to-service authentication.",
+          "securityTests": [
+            {
+              "frequency": "Quarterly",
+              "automated": false,
+              "securityTestDescription": "Security team reviews IAM credentials report to confirm no long-lived access keys exist for service accounts.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Audit Record",
+                  "evidenceDescription": "IAM credentials report confirming no long-lived service account keys.",
+                  "evidenceText": "IAM Credentials Review - 2026-04-01\nService accounts reviewed: 12\nLong-lived access keys: 0\nIMDSv2 enforcement: required (all tasks)\nLast rotated: N/A (role-based only)\nReviewer: Security Team",
+                  "lastUpdated": "2026-04-01"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-IAM-SUS",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "AWS GuardDuty alerts on suspicious privileged account activity trigger automatic Okta account suspension via an automated Lambda function within 15 minutes. Security Operations is paged immediately for review.",
+          "securityTests": [
+            {
+              "frequency": "Quarterly",
+              "automated": false,
+              "securityTestDescription": "Security team reviews GuardDuty alert history and Okta suspension log to confirm the automated response pipeline is functioning.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Procedure",
+                  "evidenceDescription": "Automated account suspension runbook and Q1 2026 alert review.",
+                  "evidenceText": "Suspicious Activity Response - Q1 2026\nGuardDuty alerts reviewed: 3\nAuto-suspensions triggered: 1\nMax detection-to-suspension: 9 min\nFalse positives remediated: 1\nReviewer: Security Ops",
+                  "lastUpdated": "2026-04-01"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-INR-AAR",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "After action reports (AARs) are generated within 30 days of any FedRAMP-reportable incident. Lessons learned are reviewed by CISO and incorporated into IRP-001 within 60 days.",
+          "securityTests": [
+            {
+              "frequency": "Annually",
+              "automated": false,
+              "securityTestDescription": "CISO reviews AAR completion record to confirm all reportable incidents generated AARs within SLA.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Procedure",
+                  "evidenceDescription": "AAR process attestation and record of FY2025 AARs completed.",
+                  "evidenceText": "AAR Status - 2026-01-31\nFedRAMP-reportable incidents (FY2025): 1\nAARs completed on-time: 1\nLessons learned incorporated: Yes (IRP-001 v2.2)\nReviewer: CISO",
+                  "lastUpdated": "2026-01-31"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-INR-RIR",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "The FGC Incident Response Plan (IRP-001) is reviewed annually by the CISO and updated within 30 days of any significant incident or FedRAMP guidance change.",
+          "securityTests": [
+            {
+              "frequency": "Annually",
+              "automated": false,
+              "securityTestDescription": "CISO and Security Operations review IRP-001 for completeness and accuracy.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Policy",
+                  "evidenceDescription": "IRP-001 v2.2 annual review sign-off.",
+                  "evidenceText": "Document: IRP-001 Incident Response Plan v2.2\nReview Date: 2026-02-10\nReviewer: Marcus Webb, CISO\nApproval: Thomas Garrett, CEO\nNext Review: 2027-02-10",
+                  "lastUpdated": "2026-02-10"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-INR-RPI",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "Past incidents are reviewed quarterly by Security Operations to identify patterns and unaddressed vulnerabilities. Findings are presented to the CISO and tracked in the security issue register.",
+          "securityTests": [
+            {
+              "frequency": "Quarterly",
+              "automated": false,
+              "securityTestDescription": "Security Operations prepares a quarterly incident trend report reviewed by CISO.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Report",
+                  "evidenceDescription": "Q1 2026 incident trend review summary.",
+                  "evidenceText": "Incident Trend Review - Q1 2026\nDate: 2026-04-05\nIncidents reviewed: 4 (90-day)\nPatterns identified: 1 (phishing attempts)\nActions taken: Enhanced KnowBe4 phishing simulation frequency\nReviewer: Security Ops / CISO",
+                  "lastUpdated": "2026-04-05"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-MLA-ALA",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "Splunk Cloud access is restricted to authorized Security Operations personnel via SAML/SSO. All Splunk search and administrative activity is logged in a separate audit index.",
+          "securityTests": [
+            {
+              "frequency": "Quarterly",
+              "automated": false,
+              "securityTestDescription": "Security team reviews Splunk access roster against authorized personnel list.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Audit Record",
+                  "evidenceDescription": "Splunk access roster review for Q1 2026.",
+                  "evidenceText": "Splunk Access Review - Q1 2026\nDate: 2026-04-01\nAuthorized users: 6\nActive users: 6\nUnauthorized access attempts: 0\nReviewer: CISO",
+                  "lastUpdated": "2026-04-01"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-MLA-EVC",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "AWS Config evaluates FGC resource configurations against 42 custom and managed rules aligned with FedRAMP Moderate baselines. Non-compliant configurations trigger PagerDuty alerts.",
+          "securityTests": [
+            {
+              "frequency": "Monthly",
+              "automated": false,
+              "securityTestDescription": "Security team reviews AWS Config compliance report to confirm 100% compliance with defined rules.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Configuration",
+                  "evidenceDescription": "AWS Config compliance summary for 2026-05.",
+                  "evidenceText": "AWS Config Compliance - 2026-05-31\nActive rules: 42\nCompliant: 42 (100%)\nNon-compliant: 0\nSuppressed: 0\nReviewer: Security Ops",
+                  "lastUpdated": "2026-05-31"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-MLA-LET",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "FGC maintains a log event type inventory in the System Description Document covering authentication events, data access, administrative actions, and error/exception events across all in-scope resources.",
+          "securityTests": [
+            {
+              "frequency": "Annually",
+              "automated": false,
+              "securityTestDescription": "Security team reviews the log event type inventory to confirm it reflects current FGC architecture.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Policy",
+                  "evidenceDescription": "Log event type inventory v1.2 reviewed 2026-02.",
+                  "evidenceText": "Log Event Inventory - v1.2\nReview Date: 2026-02-15\nEvent categories: Auth, Data Access, Admin, Error, Network\nSources: 8 (CloudTrail, Aurora, ECS, ALB, WAF, Okta, GuardDuty, Config)\nReviewer: Security Ops",
+                  "lastUpdated": "2026-02-15"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-MLA-OSM",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "Splunk Cloud serves as FGC's SIEM, aggregating logs from all in-scope sources with alert rules mapped to FedRAMP-relevant event types. Alert response SLAs are defined in the Security Operations Runbook.",
+          "securityTests": [
+            {
+              "frequency": "Quarterly",
+              "automated": false,
+              "securityTestDescription": "Security team reviews Splunk alert inventory and confirms all critical alert rules are active and operational.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Configuration",
+                  "evidenceDescription": "Splunk alert rule inventory for Q1 2026.",
+                  "evidenceText": "SIEM Alert Review - Q1 2026\nDate: 2026-04-01\nActive alert rules: 34\nCritical alerts: 12\nMean time to acknowledge (Q1): 8 min\nFalse positive rate: 4%\nReviewer: Security Ops",
+                  "lastUpdated": "2026-04-01"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-MLA-RVL",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "Security Operations reviews Splunk dashboards daily for active alerts and conducts weekly log reviews for anomalous patterns. All alerts are triaged within SLA and closed or escalated.",
+          "securityTests": [
+            {
+              "frequency": "Monthly",
+              "automated": false,
+              "securityTestDescription": "Security Operations manager reviews weekly log review records to confirm reviews are occurring and all alerts are triaged.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Audit Record",
+                  "evidenceDescription": "Log review activity record for 2026-05.",
+                  "evidenceText": "Log Review Record - 2026-05\nWeekly reviews completed: 4/4\nAlerts triaged: 18\nClosed: 17\nEscalated: 1\nOpen > 30 days: 0\nReviewer: Security Ops Manager",
+                  "lastUpdated": "2026-05-31"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-PIY-GIV",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "AWS Config and Systems Manager Inventory maintain a real-time inventory of all FGC compute, database, and network resources. Inventory is reviewed quarterly for completeness.",
+          "securityTests": [
+            {
+              "frequency": "Quarterly",
+              "automated": false,
+              "securityTestDescription": "Security team reviews Systems Manager Inventory report against expected resource counts.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Configuration",
+                  "evidenceDescription": "Systems Manager Inventory summary for Q1 2026.",
+                  "evidenceText": "Asset Inventory - Q1 2026\nDate: 2026-04-01\nECS tasks: 12\nAurora instances: 2\nS3 buckets: 8\nVPC resources: 34\nUnaccounted resources: 0\nReviewer: Engineering",
+                  "lastUpdated": "2026-04-01"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-PIY-RES",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "The CISO presents a quarterly security posture briefing to the NovaCivic CEO and Board of Directors, covering key metrics, incidents, and security investment priorities.",
+          "securityTests": [
+            {
+              "frequency": "Annually",
+              "automated": false,
+              "securityTestDescription": "CISO confirms quarterly executive security briefings occurred and were documented.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Audit Record",
+                  "evidenceDescription": "Executive security briefing record for Q1 2026.",
+                  "evidenceText": "Executive Security Briefing - Q1 2026\nDate: 2026-04-07\nAttendees: CEO, Board Chair, CISO\nTopics: Incident summary, vulnerability posture, FedRAMP status\nActions assigned: 2\nNext briefing: 2026-07-07",
+                  "lastUpdated": "2026-04-07"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-PIY-RIS",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "Security investment effectiveness is reviewed annually as part of the FGC security program assessment. The CISO evaluates tool coverage, staffing, and risk reduction outcomes against investment.",
+          "securityTests": [
+            {
+              "frequency": "Annually",
+              "automated": false,
+              "securityTestDescription": "CISO conducts annual security program assessment and documents findings.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Report",
+                  "evidenceDescription": "FY2025 security program investment review summary.",
+                  "evidenceText": "Security Investment Review - FY2025\nReview Date: 2026-01-31\nTools evaluated: 9\nGaps identified: 1 (enhanced DLP)\nBudget change: +12%\nRisk reduction score: Improved (3.2 to 2.8)\nReviewer: CISO",
+                  "lastUpdated": "2026-01-31"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-PIY-RSD",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "Security requirements are embedded into FGC's SDLC via the Security Development Lifecycle Policy (SDL-001). Threat modeling, SAST, DAST, and dependency scanning are required gates before production deployment.",
+          "securityTests": [
+            {
+              "frequency": "Annually",
+              "automated": false,
+              "securityTestDescription": "Engineering and Security review SDL-001 for completeness and alignment with current SDLC practices.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Policy",
+                  "evidenceDescription": "SDL-001 v1.3 annual review sign-off.",
+                  "evidenceText": "SDL-001 Review - v1.3\nReview Date: 2026-01-25\nReviewer: CISO + VP Engineering\nSecurity gates: 5 (threat model, SAST, dependency scan, DAST, pen test)\nNext review: 2027-01-25",
+                  "lastUpdated": "2026-01-25"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-PIY-RVD",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "NovaCivic operates a coordinated vulnerability disclosure program at security.novacivic.com. Program effectiveness, including researcher response times and payout trends, is reviewed annually.",
+          "securityTests": [
+            {
+              "frequency": "Annually",
+              "automated": false,
+              "securityTestDescription": "Security team reviews VDP metrics including reports received, response time, and resolution rate.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Report",
+                  "evidenceDescription": "FY2025 vulnerability disclosure program annual review.",
+                  "evidenceText": "VDP Annual Review - FY2025\nDate: 2026-01-31\nReports received: 14\nValid findings: 6\nMean response time: 3 days\nMean resolution time: 18 days\nCritical findings: 0\nReviewer: Security Team",
+                  "lastUpdated": "2026-01-31"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-RPL-ABO",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "FGC Aurora automated backups provide an RPO of 4 hours. ECS task definitions and Terraform state enable infrastructure recovery with an RTO of 2 hours, aligned with the FGC BCP.",
+          "securityTests": [
+            {
+              "frequency": "Annually",
+              "automated": false,
+              "securityTestDescription": "Engineering team confirms Aurora backup configuration and documented RPO/RTO alignment during the annual DR exercise.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Configuration",
+                  "evidenceDescription": "Aurora backup configuration and RPO/RTO alignment attestation.",
+                  "evidenceText": "Backup Configuration - 2026-03-15\nAurora backup window: Daily, 02:00 UTC\nBackup retention: 35 days\nPoint-in-time recovery: enabled\nDefined RPO: 4 hours\nDefined RTO: 2 hours\nReviewer: Engineering",
+                  "lastUpdated": "2026-03-15"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-RPL-ARP",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "The FGC Recovery Plan (RP-001) documents recovery procedures for all critical components and is reviewed annually. The plan is tested during quarterly DR exercises.",
+          "securityTests": [
+            {
+              "frequency": "Annually",
+              "automated": false,
+              "securityTestDescription": "CISO reviews RP-001 for completeness and verifies alignment with current FGC architecture.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Policy",
+                  "evidenceDescription": "RP-001 v1.4 annual review sign-off.",
+                  "evidenceText": "Document: RP-001 Recovery Plan v1.4\nReview Date: 2026-02-01\nReviewer: Marcus Webb, CISO\nApproval: Thomas Garrett, CEO\nNext Review: 2027-02-01",
+                  "lastUpdated": "2026-02-01"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-RPL-RRO",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "FGC RTOs and RPOs are reviewed and updated annually during the Business Continuity Plan cycle. Current RTO is 2 hours and RPO is 4 hours for all Tier 1 services.",
+          "securityTests": [
+            {
+              "frequency": "Annually",
+              "automated": false,
+              "securityTestDescription": "CISO and Engineering review and revalidate RTOs and RPOs against business requirements.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Policy",
+                  "evidenceDescription": "BCP annual RTO/RPO review attestation.",
+                  "evidenceText": "RTO/RPO Review - 2026-02-01\nFGC Core RTO: 2 hours\nFGC Core RPO: 4 hours\nReporting module RTO: 4 hours\nLast tested: 2026-03-15\nMet in DR exercise: Yes\nReviewer: CISO + Engineering",
+                  "lastUpdated": "2026-02-01"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-RPL-TRC",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "FGC conducts quarterly DR exercises testing Aurora failover, ECS task recovery, and application restart against documented RTOs and RPOs. Results are reviewed by CISO.",
+          "securityTests": [
+            {
+              "frequency": "Quarterly",
+              "automated": false,
+              "securityTestDescription": "Engineering conducts DR tabletop or live exercise and reports results to CISO.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Report",
+                  "evidenceDescription": "Q1 2026 DR exercise results.",
+                  "evidenceText": "DR Exercise - Q1 2026\nDate: 2026-03-15\nType: Live failover\nAurora failover time: 42 sec\nECS recovery time: 18 min\nApplication available: 24 min\nRTO target (2 hr): MET\nRPO target (4 hr): MET\nReviewer: CISO",
+                  "lastUpdated": "2026-03-15"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-SCR-MIT",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "NovaCivic performs supply chain risk assessments for all new third-party software dependencies before adoption. The CISA KEV list is monitored daily and KEVs affecting FGC components are remediated within 72 hours.",
+          "securityTests": [
+            {
+              "frequency": "Quarterly",
+              "automated": false,
+              "securityTestDescription": "Security team reviews supply chain risk register and confirms KEV monitoring is active.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Procedure",
+                  "evidenceDescription": "Supply chain risk register and KEV response summary for Q1 2026.",
+                  "evidenceText": "Supply Chain Risk Review - Q1 2026\nDate: 2026-04-01\nVendors reviewed: 8\nNew dependencies approved: 3\nKEVs received: 2\nKEVs remediated on time: 2\nMax remediation time: 61 hours\nReviewer: Security Team",
+                  "lastUpdated": "2026-04-01"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-SCR-MON",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "GitHub Dependabot monitors all FGC application and infrastructure dependencies for upstream vulnerability advisories and automatically opens pull requests for available patches.",
+          "securityTests": [
+            {
+              "frequency": "Monthly",
+              "automated": false,
+              "securityTestDescription": "Security team reviews Dependabot alert backlog to confirm all critical and high alerts are addressed within SLA.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Report",
+                  "evidenceDescription": "Dependabot alert backlog review for 2026-05.",
+                  "evidenceText": "Dependabot Review - 2026-05-31\nOpen critical alerts: 0\nOpen high alerts: 1 (within 30-day SLA)\nMerged Dependabot PRs (30-day): 14\nAuto-dismissed: 0\nReviewer: Engineering",
+                  "lastUpdated": "2026-05-31"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-SVC-ACM",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "All FGC infrastructure is defined in Terraform stored in GitHub. AWS Config detects configuration drift within 30 minutes and PagerDuty alerts the on-call engineer.",
+          "securityTests": [
+            {
+              "frequency": "Quarterly",
+              "automated": false,
+              "securityTestDescription": "Engineering team confirms Terraform coverage and reviews Config drift alerts over the prior quarter.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Configuration",
+                  "evidenceDescription": "Terraform coverage and configuration management attestation.",
+                  "evidenceText": "Config Management - Q1 2026\nDate: 2026-04-01\nTerraform-managed resources: 1,087\nUnmanaged resources: 0\nConfig drift alerts (90-day): 1\nDrift resolved within SLA: 1\nReviewer: Engineering",
+                  "lastUpdated": "2026-04-01"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-SVC-ASM",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "All FGC secrets, database passwords, and API keys are stored in AWS Secrets Manager with automatic 90-day rotation. No secrets are stored in code, environment variables, or Terraform state.",
+          "securityTests": [
+            {
+              "frequency": "Quarterly",
+              "automated": false,
+              "securityTestDescription": "Security team reviews Secrets Manager rotation status and audits codebase for hardcoded secrets via git-secrets scan.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Configuration",
+                  "evidenceDescription": "Secrets Manager rotation status and hardcoded secret scan attestation.",
+                  "evidenceText": "Secret Management Review - Q1 2026\nDate: 2026-04-01\nSecrets in Secrets Manager: 28\nAuto-rotation enabled: 28/28\nSecrets overdue for rotation: 0\nHardcoded secrets found in code: 0\nReviewer: Security Team",
+                  "lastUpdated": "2026-04-01"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-SVC-EIS",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "FGC undergoes annual penetration testing by ClearPath Federal Assessment Services and continuous Qualys VMDR scanning. Findings are tracked to remediation and fed back into the security roadmap.",
+          "securityTests": [
+            {
+              "frequency": "Annually",
+              "automated": false,
+              "securityTestDescription": "CISO reviews annual penetration test report and confirms all critical/high findings are remediated within SLA.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Report",
+                  "evidenceDescription": "Annual penetration test summary for FY2025.",
+                  "evidenceText": "Pen Test Summary - FY2025\nDate: 2026-01-10\nPerformed by: ClearPath Federal Assessment Services\nScope: External + internal network, web application\nCritical findings: 0\nHigh findings: 2\nRemediated: 2\nRetest: Passed 2026-02-15",
+                  "lastUpdated": "2026-02-15"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-SVC-PRR",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "FGC uses ECS Fargate ephemeral compute; no persistent storage exists on task containers. On task termination, all in-memory data is discarded and storage volumes are not reused.",
+          "securityTests": [
+            {
+              "frequency": "Annually",
+              "automated": false,
+              "securityTestDescription": "Engineering confirms ECS task configuration uses ephemeral storage only and no persistent volumes are attached.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Configuration",
+                  "evidenceDescription": "ECS task definition configuration confirming ephemeral-only storage.",
+                  "evidenceText": "ECS Task Config Review - 2026-05-01\nStorage type: Ephemeral (Fargate)\nPersistent volume mounts: 0\nData at rest: Aurora PostgreSQL only (encrypted)\nReview Date: 2026-05-01\nReviewer: Engineering",
+                  "lastUpdated": "2026-05-01"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-SVC-RUD",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "FGC data retention policies enforce deletion of grant records per agency-configured schedules, not to exceed 7 years. Expired data is purged on a monthly automated schedule and deletions are logged.",
+          "securityTests": [
+            {
+              "frequency": "Quarterly",
+              "automated": false,
+              "securityTestDescription": "Security team reviews the data deletion job execution log to confirm scheduled purges ran successfully.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Audit Record",
+                  "evidenceDescription": "Data deletion job log for Q1 2026.",
+                  "evidenceText": "Data Retention - Q1 2026\nDate: 2026-04-01\nPurge jobs executed: 3\nRecords deleted: 14,832\nFailures: 0\nMax retention in system: 6.8 years\nReviewer: Engineering",
+                  "lastUpdated": "2026-04-01"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-SVC-SNT",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "All external FGC traffic uses TLS 1.2 or higher enforced via AWS ALB security policy. Internal service-to-service traffic within the VPC uses mutual TLS with certificates managed in AWS Certificate Manager.",
+          "securityTests": [
+            {
+              "frequency": "Quarterly",
+              "automated": false,
+              "securityTestDescription": "Security team confirms ALB TLS policy is current and reviews ACM certificate expiration status.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Configuration",
+                  "evidenceDescription": "ALB TLS configuration and ACM certificate status attestation.",
+                  "evidenceText": "TLS Configuration - 2026-04-01\nALB security policy: ELBSecurityPolicy-TLS13-1-2-2021-06\nMin TLS: 1.2\nACM certs managed: 6\nExpiring < 30 days: 0\nAuto-renewal: enabled\nReviewer: Engineering",
+                  "lastUpdated": "2026-04-01"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-SVC-VCM",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "Inter-service communications are authenticated via AWS ECS task IAM roles and mutual TLS certificates issued by ACM Private CA. Unauthenticated inter-service calls are denied by security group rules.",
+          "securityTests": [
+            {
+              "frequency": "Annually",
+              "automated": false,
+              "securityTestDescription": "Engineering confirms ACM Private CA is operational and all inter-service mTLS certificates are valid.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Configuration",
+                  "evidenceDescription": "ACM Private CA and inter-service mTLS configuration attestation.",
+                  "evidenceText": "mTLS Config - 2026-05-01\nACM Private CA: active\nService certificates issued: 8\nExpired: 0\nAuto-renewal: enabled\nUnauthenticated service calls blocked: confirmed\nReviewer: Engineering",
+                  "lastUpdated": "2026-05-01"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "KSI-SVC-VRI",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "All FGC container images are signed using AWS Signer with ECR image signing. The ECS deployment pipeline verifies signatures before deployment and rejects unsigned images.",
+          "securityTests": [
+            {
+              "frequency": "Quarterly",
+              "automated": false,
+              "securityTestDescription": "Engineering confirms AWS Signer and ECR image signing are active for all production repositories.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Configuration",
+                  "evidenceDescription": "ECR image signing configuration attestation.",
+                  "evidenceText": "Image Integrity - 2026-04-01\nAWS Signer: active\nSigned repositories: 18/18\nDeploy-time verification: enabled\nUnsigned deploy attempts blocked (90-day): 0\nReviewer: Engineering",
+                  "lastUpdated": "2026-04-01"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "AFC-CSO-INB",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "NovaCivic maintains a dedicated FedRAMP security inbox at fedramp@novacivic.com, monitored 24/7 by Security Operations with a 4-hour response SLA for Emergency-class messages.",
+          "securityTests": [
+            {
+              "frequency": "Quarterly",
+              "automated": false,
+              "securityTestDescription": "CISO confirms fedramp@novacivic.com is active, properly routed, and monitoring SLAs are being met.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Procedure",
+                  "evidenceDescription": "FedRAMP inbox monitoring procedure and Q1 2026 SLA attestation.",
+                  "evidenceText": "FedRAMP Inbox Review - Q1 2026\nInbox: fedramp@novacivic.com\nMonitoring: 24/7 Security Ops\nEmergency SLA: 4 hours\nMessages received (90-day): 3\nResponse time compliance: 100%\nReviewer: CISO",
+                  "lastUpdated": "2026-04-01"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "AFC-CSO-NOC",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "NovaCivic notifies FedRAMP of significant changes to FGC via fedramp@novacivic.com and the FedRAMP portal per the Significant Change Notification process defined in SCN-001.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "AFC-CSO-TFG",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "fedramp@novacivic.com is hosted on a dedicated mail domain with explicit allow-listing for @fedramp.gov and @gsa.gov to prevent filtering by anti-spam controls.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "AFC-CSO-RCV",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "fedramp@novacivic.com is hosted on Fastmail's dedicated government-compatible mail infrastructure with a 99.9% uptime SLA, independent of the primary novacivic.com mail domain.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "AFC-CSO-CRA",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "FedRAMP required actions received at fedramp@novacivic.com are assigned to an owner in the NovaCivic security ticket system within 4 hours and tracked to completion within stated deadlines.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "AFC-CSO-EMR",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "Emergency messages received at fedramp@novacivic.com trigger an immediate PagerDuty alert to the on-call Security Operations engineer, ensuring 24/7 coverage within the 4-hour SLA.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "AFC-CSO-IMA",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "Important messages from FedRAMP are logged as tickets in the NovaCivic security issue tracker and assigned to the appropriate team within 1 business day.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "AFC-CSO-ACK",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "NovaCivic acknowledges all FedRAMP communications within 4 hours for Emergency messages and 1 business day for all other message types.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "VDR-CSO-DET",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "FGC production systems are scanned by Qualys VMDR on a continuous basis. AWS GuardDuty provides continuous threat detection across all in-scope AWS accounts. Critical findings are triaged within 24 hours.",
+          "securityTests": [
+            {
+              "frequency": "Monthly",
+              "automated": false,
+              "securityTestDescription": "Security team reviews Qualys scan coverage and GuardDuty finding backlog to confirm detection capabilities are operational.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Report",
+                  "evidenceDescription": "Qualys and GuardDuty coverage attestation for 2026-05.",
+                  "evidenceText": "Vulnerability Detection - 2026-05-31\nQualys VMDR: active (all compute)\nGuardDuty: active (all accounts)\nCritical findings open > 15 days: 0\nCoverage gaps: 0\nReviewer: Security Ops",
+                  "lastUpdated": "2026-05-31"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "VDR-CSO-RES",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "The FGC Vulnerability Response Policy (VRP-001) defines remediation SLAs: Critical within 7 days, High within 30 days, Medium within 90 days. All open findings are tracked in a dedicated vulnerability register.",
+          "securityTests": [
+            {
+              "frequency": "Monthly",
+              "automated": false,
+              "securityTestDescription": "Security team reviews vulnerability register for findings exceeding SLA.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Report",
+                  "evidenceDescription": "Vulnerability register SLA compliance for 2026-05.",
+                  "evidenceText": "Vuln Response - 2026-05-31\nCritical (open > 7 days): 0\nHigh (open > 30 days): 0\nMedium (open > 90 days): 1 (accepted)\nReviewer: Security Team",
+                  "lastUpdated": "2026-05-31"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "VDR-CSO-ADT",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "Qualys VMDR performs continuous authenticated scanning of all FGC compute assets. ECR image scanning via Amazon Inspector runs on every image push.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "VDR-CSO-DAC",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "All FGC deployments trigger a post-deployment Qualys scan of the affected compute assets to detect vulnerabilities introduced by changes before traffic is shifted.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "VDR-CSO-FAV",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "Qualys VMDR scan failures and connectivity errors are treated as vulnerabilities and tracked until resolved. Failed scans generate PagerDuty alerts within 15 minutes.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "VDR-CSO-AKE",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "CISA KEV list is monitored daily via an automated feed integrated with the vulnerability register. KEVs affecting FGC components are prioritized and remediated within 72 hours of identification.",
+          "securityTests": [
+            {
+              "frequency": "Monthly",
+              "automated": false,
+              "securityTestDescription": "Security team reviews KEV monitoring log to confirm feed is current and no overdue KEVs exist.",
+              "command": "",
+              "evidence": [
+                {
+                  "evidenceType": "Audit Record",
+                  "evidenceDescription": "CISA KEV monitoring and response log for 2026-05.",
+                  "evidenceText": "KEV Monitoring - 2026-05-31\nKEVs assessed against FGC inventory: 34\nApplicable KEVs (2026-05): 1\nRemediated within 72 hours: 1\nOverdue KEVs: 0\nReviewer: Security Team",
+                  "lastUpdated": "2026-05-31"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "frId": "CCM-OCR-AVL",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "The FGC Ongoing Certification Report (OCR) is published quarterly to the NovaCivic trust center at trust.novacivic.com and made available to all authorized agency customers.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "CCM-OCR-NRD",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "Each FGC Ongoing Certification Report includes the scheduled date of the next report in the document header. The next report is scheduled for 2026-09-01.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "CCM-OCR-FBM",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "The FGC trust center includes a secure feedback form at trust.novacivic.com/feedback for authorized agency customers to submit questions, concerns, or comments about the OCR.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "CCM-OCR-AFS",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "Anonymized feedback summaries from agency customers are included in the following quarter's OCR, with specific agency identifiers removed to protect confidentiality.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "CCM-OCR-LSI",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "FGC OCRs published to the public trust center are reviewed by the CISO before publication to confirm no sensitive security details, vulnerability specifics, or PII are included.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "CCM-OCR-RPS",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "FGC OCRs are published to the public-facing trust center. OCRs are cleared for public release by CISO review. Sensitive assessment details are retained in the authenticated portion of the trust center.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "CCM-QTR-MTG",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "NovaCivic conducts a quarterly review meeting open to all authorized agency customers using FGC. Meeting invitations and agenda are distributed 30 days in advance via the trust center and email.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "CCM-QTR-REG",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "Quarterly review meeting registration information, including video conference link and agenda, is published to trust.novacivic.com at least 30 days before each meeting.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "CCM-QTR-NRD",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "Each quarterly review meeting concludes with announcement of the date and registration link for the following quarter's meeting, also posted to the trust center.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "CCM-QTR-NID",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "Quarterly review materials and recordings do not include specific vulnerability details, unmitigated findings, or other information that could assist adversaries. Content is reviewed by CISO before publication.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "CCM-QTR-ACT",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "FGC quarterly review meetings include a roadmap update, security posture summary, recent OCR walkthrough, and an open Q&A session for agency customers.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "CCM-QTR-RTR",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "All FGC quarterly review meetings are recorded and transcribed. Recordings and transcripts are published to the authenticated portion of the trust center within 5 business days.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "CCM-QTR-RTP",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "FGC quarterly review recordings and transcripts are restricted to authorized agency customers. Third parties not serving a current agency customer are not granted access without CISO approval.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "CCM-QTR-SRR",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "NovaCivic shares quarterly review recordings responsibly, restricting distribution to authenticated agency portal users. Recordings are not posted to public-facing platforms.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "CCM-QTR-SCR",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "All quarterly review content, including slides and transcripts, is reviewed by CISO before distribution to confirm no sensitive security information is included.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "CDS-CSO-PUB",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "FGC public certification information including service description, authorization status, authorization path, UEI, trust center URL, and primary contacts is maintained at trust.novacivic.com.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "CDS-CSO-SVC",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "The NovaCivic trust center maintains a current list of all services included under the FGC FedRAMP certification: FGC Core, FGC Financial Reporting, and FGC Analytics.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "CDS-CSO-UTC",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "All FedRAMP certification materials for FGC are hosted at trust.novacivic.com, a FedRAMP-compatible trust center providing both public and authenticated agency access to certification data.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "CDS-CSO-CBF",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "FGC certification data is published in both human-readable format on the trust center web UI and machine-readable JSON via the trust center API. Both formats are updated simultaneously at publication.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "CDS-CSO-RIS",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "NovaCivic shares FGC certification information responsibly. Sensitive assessment details and vulnerability specifics are restricted to the authenticated agency portal. Public-facing data contains only non-sensitive certification metadata.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "CDS-CSO-HAD",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "Historical FGC OCRs and quarterly review materials are retained in the trust center for a minimum of 3 years and remain accessible to authorized agency customers.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "MAS-CSO-IIR",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "The FGC Minimum Assessment Scope includes all AWS GovCloud infrastructure, ECS Fargate tasks, Aurora PostgreSQL databases, S3 storage, ALB, WAF, GuardDuty, Config, and the Okta Government Cloud identity tenant.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "MAS-CSO-FLO",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "FGC processes grant management data at the Moderate impact level. Data flows are documented in the FGC System Description, including grant applicant PII, award financials, and performance reports.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "MAS-CSO-TPR",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "AWS GovCloud (FedRAMP High authorized, FR2020-000001) and Okta Government Cloud are the primary third-party information resources within the FGC assessment boundary. Both are documented in the COP.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "MAS-CSO-MDI",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "All FGC information resources in the asset inventory include metadata fields for system name, owner, data classification, impact level, and last-reviewed date per the FGC Asset Tagging Policy.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "MAS-CSO-SUP",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "Supplemental scope information including agency tenant isolation architecture, data flow diagrams, and network topology is maintained in the authenticated section of the NovaCivic trust center.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "SCG-CSO-RSC",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "The FGC Secure Configuration Guide (SCG) documents recommended configurations for Okta SSO integration, agency tenant RBAC setup, MFA policy enforcement, and audit log forwarding to agency SIEM.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "SCG-CSO-AUP",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "The FGC SCG includes step-by-step instructions for applying each recommended configuration, including screen-by-screen guidance for Okta tenant setup and FGC administrative console settings.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "SCG-CSO-PUB",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "The FGC SCG is publicly available at docs.novacivic.com/security/scg without authentication, enabling agencies to review recommended configurations before and during onboarding.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "SCG-CSO-SDF",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "FGC is configured with secure defaults: FIDO2 MFA is enforced by default, TLS 1.2+ is required, and audit logging is enabled on all agency tenants. Administrators cannot disable these settings.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "SCN-CSO-MAR",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "All FGC significant changes are logged in the GitHub repository commit history and recorded in a change management register maintained in Jira with classification, risk assessment, and approvals.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "SCN-CSO-INF",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "FGC change notifications include change description, change classification, risk assessment, deployment date, rollback plan, and affected services as required by the FedRAMP Significant Change Notification rules.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "SCN-CSO-HIS",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "Historical FGC significant change notifications are retained for 3 years and available in both the Jira change register and the authenticated section of the trust center.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "SCN-CSO-HRM",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "FGC change notifications are published in human-readable format on the trust center and in machine-readable JSON via the trust center API for programmatic consumption by agency customers.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "SCN-CSO-NOM",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "Significant FGC changes are communicated to FedRAMP via the FedRAMP portal and to agency customers via trust center notifications and email to registered agency security contacts.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "SCN-CSO-EVA",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "All FGC changes are evaluated for potential security impact using the Change Classification Matrix in CMP-001 Appendix A before deployment. Changes classified as Transformative require CISO approval.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "SCN-CSO-EMG",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "Emergency changes to FGC are deployed immediately with CISO verbal approval and documented retroactively within 24 hours. FedRAMP and affected agencies are notified within 4 hours of deployment.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "SCN-ADP-NTF",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "Adaptive changes to FGC are communicated to FedRAMP and agency customers via the trust center notification feed no later than 30 days after deployment.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "IEC-CSO-EFR",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "All FGC security events are evaluated against the FedRAMP PAIN rating matrix within 2 hours of detection to determine FedRAMP reportability. Triage is performed by Security Operations using IRP-001 guidance.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "IEC-CSO-DPR",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "When full incident impact cannot be determined within 2 hours, NovaCivic defaults to PAIN rating Medium and immediately notifies FedRAMP with available information, updating the rating as investigation progresses.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "IEC-CSO-EFI",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "Federal impact is estimated based on the number of affected agency tenants, data categories involved, and duration of exposure, using the FGC Incident Impact Estimation Worksheet in IRP-001 Appendix B.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "IEC-CSO-AIR",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "FGC submits automated initial incident reports to FedRAMP via the FedRAMP API within 1 hour of determining FedRAMP reportability, using a structured JSON payload defined in IRP-001.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "CMU-CSO-CMD",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "FGC uses AWS KMS (FIPS 140-2 Level 2 validated) for all data at-rest encryption and TLS 1.2+ for all data in-transit. Cryptographic module documentation is maintained in the FGC System Description and updated annually.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "CMU-CSO-CAT",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "Each agency tenant's data is encrypted with a dedicated AWS KMS key. Key policies prevent cross-tenant access. Agency administrators cannot access or modify encryption keys for other tenants.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "MKT-IIP-AGU",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "FGC is designed for federal grant-making agencies at the CFO Act agency level administering competitive and formula grants. Intended use cases include award management, SF-425 reporting, and grants portfolio analytics.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "MKT-IIP-DCP",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "NovaCivic is actively pursuing FedRAMP 20x certification for FGC. The independent assessment was completed by ClearPath Federal Assessment Services, LLC in Q1 2026. FGC is in the final FedRAMP review phase.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "MKT-CSO-MLR",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "NovaCivic has submitted a FedRAMP marketplace listing request for FGC. The listing includes authorized agency use cases, service description, trust center link, and contact information.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "FRC-CSO-PKG",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "The FGC FedRAMP certification package consists of this SDR and the associated Certification Overview Package (COP), both maintained in the NovaCivic trust center and the FedRAMP portal.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "FRC-CSO-JSN",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "The FGC COP and SDR are authored and maintained in conformance with the FedRAMP JSON schemas for cr26CertificationOverviewPackage and cr26SecurityDecisionRecord.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "FRC-CSO-MRA",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "NovaCivic maintains full responsibility and accountability for all FGC security controls, including those partially implemented in leveraged FedRAMP-authorized services such as AWS GovCloud and Okta Government Cloud.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "FRC-APP-AFC",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "NovaCivic applied for FedRAMP 20x certification through the marketplace listing process per FRC-APP-AFC. The application was submitted on 2026-01-07 following completion of the independent assessment.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "FRC-CSX-SUM",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "This SDR constitutes the FGC initial implementation summaries, covering all applicable KSIs and FRR requirements for a FedRAMP 20x Class A certification.",
+          "securityTests": []
+        }
+      ]
+    },
+    {
+      "frId": "FRC-CLA-AFR",
+      "securityAchievement": [
+        {
+          "securityAchievementDescription": "NovaCivic addresses all applicable FedRAMP rules for Class A certification as documented in this SDR. Class A evidence is primarily attestation-based with manual validation, appropriate to the service's risk profile.",
+          "securityTests": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "serviceIdentification": {
+    "providerName": "NovaCivic Solutions, LLC",
+    "serviceName": "NovaCivic FedGrant Cloud",
+    "serviceAcronym": "FGC",
+    "serviceDescription": "NovaCivic FedGrant Cloud (FGC) is a SaaS grant lifecycle management platform enabling federal grant-making agencies to administer awards from opportunity announcement through closeout. FGC integrates with SAM.gov and Grants.gov to streamline applicant eligibility verification, award processing, performance monitoring, and federal financial reporting. All data is processed and stored exclusively in AWS GovCloud (us-gov-west-1) at the Moderate impact level.",
+    "authorizationPath": "20x",
+    "fedRampPackageId": "FR2026-001144",
+    "ueiNumber": "NMCV7Q3L8P14",
+    "website": "https://fedgrant.novacivic.com",
+    "logo": "https://fedgrant.novacivic.com/assets/novacivic-logo.png"
+  },
+  "serviceProperties": {
+    "serviceType": ["SaaS"],
+    "deploymentModel": "Government-Only Cloud",
+    "digitalIdentityLevel": "IAL2/FAL2/AAL2",
+    "businessCategory": ["Grant Management", "Data Management", "Governance, Risk & Compliance"],
+    "trustCenter": {
+      "repositoryType": ["Trust Center", "Assessment Reports"],
+      "url": "https://trust.novacivic.com",
+      "repositoryDescription": "NovaCivic FedGrant Cloud trust center hosting FedRAMP certification package, Ongoing Certification Reports, quarterly review materials, and security documentation for authorized agency customers.",
+      "authenticationRequired": true,
+      "accessRequestInstructions": "Email fedramp@novacivic.com with your name, agency name, and intended use. Access is provisioned within 1 business day after identity verification."
+    },
+    "secureConfigurationGuidance": {
+      "repositoryType": ["Secure Configuration Guidance"],
+      "url": "https://docs.novacivic.com/security/scg",
+      "repositoryDescription": "Publicly available Secure Configuration Guide covering recommended Okta SSO settings, agency tenant isolation, MFA enforcement policies, and audit log integration for agency administrators.",
+      "authenticationRequired": false
+    },
+    "additionalRepositories": [
+      {
+        "repositoryType": ["Security Policy", "Procedures"],
+        "url": "https://github.com/novacivic/fedramp-public",
+        "repositoryDescription": "Public GitHub repository containing FedRAMP authorization documentation, system description, and non-sensitive security artifacts.",
+        "authenticationRequired": false
+      }
+    ],
+    "nextOngoingCertificationReportDate": "2026-09-01"
+  },
+  "contactInformation": [
+    {
+      "contactType": "Primary",
+      "contactName": "Thomas Garrett",
+      "contactEmail": "tgarrett@novacivic.com",
+      "contactPhone": "571-555-0186"
+    },
+    {
+      "contactType": "Security",
+      "contactName": "Marcus Webb",
+      "contactEmail": "fedramp@novacivic.com",
+      "contactPhone": "571-555-0187"
+    },
+    {
+      "contactType": "Sales",
+      "contactName": "Priya Nair",
+      "contactEmail": "pnair@novacivic.com",
+      "contactPhone": "571-555-0188"
+    }
+  ],
+  "assessor": {
+    "name": "ClearPath Federal Assessment Services, LLC",
+    "id": "3PAO-CPFAS-001"
+  },
+  "certifiedServices": [
+    {
+      "serviceName": "FGC Core",
+      "serviceDescription": "Core grant lifecycle management including opportunity posting, application intake, eligibility review, award processing, and closeout. Integrates with SAM.gov for applicant verification and Grants.gov for opportunity syndication.",
+      "dateAvailable": "2025-10-01"
+    },
+    {
+      "serviceName": "FGC Financial Reporting",
+      "serviceDescription": "Federal financial reporting module supporting SF-425 Federal Financial Reports, SF-270 drawdown requests, and agency-configurable custom report templates.",
+      "dateAvailable": "2025-10-01"
+    },
+    {
+      "serviceName": "FGC Analytics",
+      "serviceDescription": "Read-only dashboards and exportable reports for grant portfolio performance, spend analysis, and compliance status for agency program officers.",
+      "dateAvailable": "2026-01-15"
+    }
+  ],
+  "thirdPartyInformationResources": {
+    "certified": [
+      {
+        "fedRampCertifiedThirdPartyInformationResource": "FR2020-000001",
+        "useCase": "AWS GovCloud (us-gov-west-1) provides underlying IaaS and PaaS infrastructure including ECS Fargate compute, Aurora PostgreSQL managed database, S3 object storage, and VPC networking."
+      }
+    ],
+    "nonCertified": [
+      {
+        "name": "Okta Government Cloud",
+        "provider": "Okta, Inc.",
+        "website": "https://www.okta.com/government/",
+        "useCase": "Identity provider for agency SSO federation and FIDO2/WebAuthn MFA enforcement for all FGC user authentication."
+      },
+      {
+        "name": "Splunk Cloud Platform (GovCloud)",
+        "provider": "Splunk Inc.",
+        "website": "https://www.splunk.com/en_us/products/splunk-cloud-platform.html",
+        "useCase": "SIEM for centralized log aggregation, correlation, alerting, and security operations dashboards."
+      }
+    ]
+  }
+}
